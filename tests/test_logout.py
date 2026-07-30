@@ -2,23 +2,17 @@ from pages.login_page import LoginPage
 from pages.dashboard_page import DashboardPage
 
 
-def test_valid_login(driver):
+def test_logout(driver):
 
     login = LoginPage(driver)
     dashboard = DashboardPage(driver)
 
     login.open()
+
     login.login("Admin", "admin123")
 
     assert dashboard.is_dashboard_displayed()
 
+    dashboard.logout()
 
-def test_invalid_login(driver):
-
-    login = LoginPage(driver)
-
-    login.open()
-
-    login.login("Admin", "wrongpassword")
-
-    assert login.get_error_message() == "Invalid credentials"
+    assert "login" in driver.current_url.lower()

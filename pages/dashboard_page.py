@@ -28,5 +28,4 @@ class DashboardPage(BasePage):
     def logout(self):
 
         self.click(self.USER_DROPDOWN)
-
         self.click(self.LOGOUT)

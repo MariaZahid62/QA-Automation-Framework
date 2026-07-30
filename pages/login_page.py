@@ -10,6 +10,12 @@ class LoginPage(BasePage):
     PASSWORD = (By.NAME, "password")
     LOGIN_BUTTON = (By.XPATH, "//button[@type='submit']")
 
+    # Add this here
+    ERROR_MESSAGE = (
+        By.XPATH,
+        "//p[contains(@class,'oxd-alert-content-text')]"
+    )
+
     def open(self):
         self.driver.get(self.URL)
 
@@ -20,3 +26,7 @@ class LoginPage(BasePage):
         self.enter_text(self.PASSWORD, password)
 
         self.click(self.LOGIN_BUTTON)
+
+    # Add this here
+    def get_error_message(self):
+        return self.get_text(self.ERROR_MESSAGE)
