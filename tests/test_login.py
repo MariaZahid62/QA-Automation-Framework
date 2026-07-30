@@ -1,20 +1,23 @@
-from utilities.driver_factory import DriverFactory
 from pages.login_page import LoginPage
+from pages.dashboard_page import DashboardPage
 
 
-def test_valid_login():
+def test_valid_login(driver):
 
-    driver = DriverFactory.get_driver()
+    login = LoginPage(driver)
+    dashboard = DashboardPage(driver)
+
+    login.open()
+    login.login("Admin", "admin123")
+
+    assert dashboard.is_dashboard_displayed()
+
+
+def test_invalid_login(driver):
 
     login = LoginPage(driver)
 
     login.open()
+    login.login("Admin", "wrongpassword")
 
-    login.login(
-        "Admin",
-        "admin123"
-    )
-
-    assert "dashboard" in driver.current_url.lower()
-
-    driver.quit()
+    assert "dashboard" not in driver.current_url.lower()
