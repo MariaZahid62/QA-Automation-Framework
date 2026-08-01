@@ -24,3 +24,9 @@ class BasePage:
         return self.wait.until(
             EC.visibility_of_element_located(locator)
         ).text
+
+    def is_visible(self, locator):
+
+         return self.wait.until(
+        EC.visibility_of_element_located(locator)
+    ).is_displayed()
